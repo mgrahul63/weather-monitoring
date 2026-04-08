@@ -1,0 +1,28 @@
+import { getTemperatureData } from "@/lib/weather-info";
+import Image from "next/image";
+import Card from "./Card";
+
+const TemperatureComponent = async ({ lat, lon }) => {
+  const temperature = await getTemperatureData(lat, lon);
+  return (
+    <Card>
+      <h6 className="feature-name">Current Temperature</h6>
+      <div className="feature-main">
+        <Image
+          className="max-w-20"
+          src="/assets/icons/icon_tempareture.png"
+          alt="rain icon"
+          height={80}
+          width={80}
+        />
+        <h3 className="feature-title">{temperature?.temp}°C</h3>
+
+        <span className="feature-name">
+          Feels Like {temperature?.feels_like}°C
+        </span>
+      </div>
+    </Card>
+  );
+};
+
+export default TemperatureComponent;
